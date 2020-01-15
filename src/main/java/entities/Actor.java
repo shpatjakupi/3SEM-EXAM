@@ -1,11 +1,13 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -24,6 +26,8 @@ public class Actor implements Serializable {
     private String name;
     private String about;
     private Long id;
+    @ManyToMany
+    private List<Movie> movies;
 
      public Actor() {
     }

@@ -1,6 +1,7 @@
 package security;
 
 import entities.Genre;
+import entities.User;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,7 +13,7 @@ public class UserPrincipal implements Principal {
   private List<String> roles = new ArrayList<>();
 
   /* Create a UserPrincipal, given the Entity class Genre*/
-  public UserPrincipal(Genre user) {
+  public UserPrincipal(User user) {
     this.username = user.getUserName();
     this.roles = user.getRolesAsStrings();
   }

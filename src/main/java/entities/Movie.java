@@ -6,11 +6,13 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -37,6 +39,14 @@ public class Movie implements Serializable {
     private String title;
     private int year;
     private int votes;
+    @ManyToMany(mappedBy = "movies")
+    private List<Director> directors;
+    
+    @ManyToMany(mappedBy = "movies")
+    private List<Actor> actors;
+    
+    @ManyToMany(mappedBy = "movies")
+    private List<Genre> genres;
  
 
     public Movie() {
@@ -98,12 +108,37 @@ public class Movie implements Serializable {
         }
         return true;
     }
+
+    public List<Director> getDirectors() {
+        return directors;
+    }
+
+    public void setDirectors(List<Director> directors) {
+        this.directors = directors;
+    }
+
+    public List<Actor> getActors() {
+        return actors;
+    }
+
+    public void setActors(List<Actor> actors) {
+        this.actors = actors;
+    }
+
+    public List<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" + "id=" + id + ", title=" + title + ", year=" + year + ", votes=" + votes + ", directors=" + directors + ", actors=" + actors + ", genres=" + genres + '}';
+    }
     
 
    
 
-//    @Override
-//    public String toString() {
-//        return "Movie{" + "id=" + id + ",\n title=" + title + ",\n year=" + year + ",\n votes=" + votes + ",\n directors=" + directors + ",\n actors=" + actors + ",\n genres=" + genres + '}';
-//    }
 }

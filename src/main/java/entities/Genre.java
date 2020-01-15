@@ -33,7 +33,8 @@ public class Genre implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-
+    @ManyToMany
+    private List<Movie> movies;
 
     public Genre() {
     }

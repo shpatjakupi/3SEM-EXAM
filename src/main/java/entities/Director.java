@@ -18,7 +18,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Plaul
+ * @author shpat
  */
 @Entity
 @NamedQueries({
@@ -35,6 +35,9 @@ public class Director implements Serializable {
     private String about;
     private Long id;
 
+    @ManyToMany
+    private List<Movie> movies;
+    
     public Director() {
     }
 

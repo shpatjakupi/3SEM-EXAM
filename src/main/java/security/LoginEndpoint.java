@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import entities.Genre;
+import entities.User;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -43,7 +44,7 @@ public class LoginEndpoint {
     String password = json.get("password").getAsString();
 
     try {
-      Genre user = USER_FACADE.getVeryfiedUser(username, password);
+      User user = USER_FACADE.getVeryfiedUser(username, password);
       String token = createToken(username, user.getRolesAsStrings());
       JsonObject responseJson = new JsonObject();
       responseJson.addProperty("username", username);
