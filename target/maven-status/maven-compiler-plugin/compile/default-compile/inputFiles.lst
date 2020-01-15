@@ -9,6 +9,7 @@
 /Users/orale/Desktop/3SEM-EXAM/src/main/java/DTO/DirectorDTO.java
 /Users/orale/Desktop/3SEM-EXAM/src/main/java/DTO/GenreDTO.java
 /Users/orale/Desktop/3SEM-EXAM/src/main/java/entities/Movie.java
+/Users/orale/Desktop/3SEM-EXAM/src/main/java/rest/MovieResource.java
 /Users/orale/Desktop/3SEM-EXAM/src/main/java/DTO/ActorDTO.java
 /Users/orale/Desktop/3SEM-EXAM/src/main/java/utils/EMF_Creator.java
 /Users/orale/Desktop/3SEM-EXAM/src/main/java/utils/SetupTestUsers.java

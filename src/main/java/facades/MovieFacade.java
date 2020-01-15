@@ -157,6 +157,17 @@ public class MovieFacade {
             em.close();
         }
     }
+     public List<MovieDTO> getAllMovies() throws NotFoundException {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<MovieDTO> tq = em.createNamedQuery("Movie.getAll", MovieDTO.class);
+            List<MovieDTO> movies = tq.getResultList();
+            if(movies.size() < 1) throw new NotFoundException("No movies has been added to the database yet.");
+            return movies;
+        } finally {
+            em.close();
+        }
+    }
      
    
     public MovieDTO deleteMovie(Long id) throws NotFoundException {
