@@ -1,7 +1,7 @@
 package rest;
 
 import com.google.gson.Gson;
-import entities.User;
+import entities.Genre;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
@@ -43,7 +43,7 @@ public class UserResource {
 
         EntityManager em = EMF.createEntityManager();
         try {
-            List<User> users = em.createQuery("select user from User user").getResultList();
+            List<Genre> users = em.createQuery("select user from User user").getResultList();
             return "[" + users.size() + "]";
         } finally {
             em.close();

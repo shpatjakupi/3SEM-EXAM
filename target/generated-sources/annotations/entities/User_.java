@@ -1,6 +1,6 @@
 package entities;
 
-import entities.Role;
+import entities.Director;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
@@ -12,6 +12,6 @@ public class User_ {
 
     public static volatile SingularAttribute<User, String> userPass;
     public static volatile SingularAttribute<User, String> userName;
-    public static volatile ListAttribute<User, Role> roleList;
+    public static volatile ListAttribute<User, Director> roleList;
 
 }

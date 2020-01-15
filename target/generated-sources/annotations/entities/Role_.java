@@ -7,10 +7,10 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
 @Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-11-19T14:44:02")
-@StaticMetamodel(Role.class)
+@StaticMetamodel(Director.class)
 public class Role_ { 
 
-    public static volatile ListAttribute<Role, User> userList;
-    public static volatile SingularAttribute<Role, String> roleName;
+    public static volatile ListAttribute<Director, User> userList;
+    public static volatile SingularAttribute<Director, String> roleName;
 
 }

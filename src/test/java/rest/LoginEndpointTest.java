@@ -1,8 +1,8 @@
 package rest;
 
-import entities.RenameMe;
-import entities.User;
-import entities.Role;
+import entities.Actor;
+import entities.Genre;
+import entities.Director;
 
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
@@ -28,7 +28,7 @@ public class LoginEndpointTest {
 
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
-    private static RenameMe r1, r2;
+    private static Actor r1, r2;
 
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
     private static HttpServer httpServer;
@@ -70,13 +70,13 @@ public class LoginEndpointTest {
             em.createQuery("delete from User").executeUpdate();
             em.createQuery("delete from Role").executeUpdate();
 
-            Role userRole = new Role("user");
-            Role adminRole = new Role("admin");
-            User user = new User("user", "test");
+            Director userRole = new Director("user");
+            Director adminRole = new Director("admin");
+            Genre user = new Genre("user", "test");
             user.addRole(userRole);
-            User admin = new User("admin", "test");
+            Genre admin = new Genre("admin", "test");
             admin.addRole(adminRole);
-            User both = new User("user_admin", "test");
+            Genre both = new Genre("user_admin", "test");
             both.addRole(userRole);
             both.addRole(adminRole);
             em.persist(userRole);
@@ -170,7 +170,7 @@ public class LoginEndpointTest {
             .contentType("application/json")
             .header("x-access-token", securityToken)
             .when()
-            .get("/info/user").then()  //Call User endpoint as Admin
+            .get("/info/user").then()  //Call Genre endpoint as Admin
             .statusCode(401);
   }
   
