@@ -9,10 +9,12 @@ import DTO.GenreDTO;
 import DTO.ActorDTO;
 import DTO.DirectorDTO;
 import errorhandling.NotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -44,7 +46,7 @@ public class MovieFacade {
         return emf.createEntityManager();
     }
 
-    public Director getDirectorById(long id) throws PersonNotFoundException {
+    public Director getDirectorById(long id) throws NotFoundException {
         EntityManager em = getEntityManager();
         try {
             if (id == 0) {
@@ -60,7 +62,7 @@ public class MovieFacade {
         }
     }
     
-    public Genre getGenreById(long id) throws PersonNotFoundException {
+    public Genre getGenreById(long id) throws NotFoundException {
         EntityManager em = getEntityManager();
         try {
             if (id == 0) {
@@ -76,11 +78,11 @@ public class MovieFacade {
         }
     }
     
-    public Actor getActorByName(long id) throws PersonNotFoundException {
+    public Actor getActorById(long id) throws NotFoundException {
         EntityManager em = getEntityManager();
         try {
             if (id == 0) {
-                throw new PersonNotFoundException("Actor not found on the id: " + id);
+                throw new NotFoundException("Actor not found on the id: " + id);
                 
             }
             return em.find(Actor.class, id);
@@ -92,11 +94,83 @@ public class MovieFacade {
         }
     }
     
-     public MovieDTO addMovie(Movie m){
+     public MovieDTO addMovie(Movie m) throws NotFoundException{
         EntityManager em = emf.createEntityManager();
         
-       return null;
+        Director director;
+        Actor actor;
+        Genre genre;
+        
+        List<Director> Directors = new ArrayList<>();
+        List<Actor> Actors = new ArrayList<>();
+        List<Genre> Genres = new ArrayList<>();
+        
+        try{
+            em.getTransaction().begin();
+            em.persist(m);
+            
+            for(Director d : m.getDirectors()){
+                director = getDirectorById(d.getId());
+                if(director == null){
+                    em.persist(d);
+                }else{
+                    Directors.add(director);
+                }
+            }
+            
+            for(Actor a : m.getActors()){
+                actor = getActorById(a.getId());
+                if(actor == null){
+                    em.persist(a);
+                    System.out.println(a);
+                }else{
+                    Actors.add(actor);
+                }
+            }
+            
+            for(Genre g : m.getGenres()){
+                genre = getGenreById(g.getId());
+                if(genre == null){
+                    em.persist(g);
+                }else{
+                    Genres.add(genre);
+                }
+            }
+        
+            
+            em.getTransaction().commit();
+            return new MovieDTO(m);
+        }finally{
+            em.close();
+        }
+      
      }
              
+     public List<MovieDTO> getMovieByTitle(String title) throws NotFoundException {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<MovieDTO> tq = em.createNamedQuery("Movie.getByTitle", MovieDTO.class).setParameter("title", title);
+            List<MovieDTO> movies = tq.getResultList();
+            if(movies.size() < 1) throw new NotFoundException("No movies named " + title + " exists in the database.");
+            return movies;
+        } finally {
+            em.close();
+        }
+    }
+     
+   
+    public MovieDTO deleteMovie(Long id) throws NotFoundException {
+        EntityManager em = emf.createEntityManager();
+        try{
+            Movie m = em.find(Movie.class, id);
+            if(m == null) throw new NotFoundException("Movie with id " + id + " doesnt exist.");
+            em.getTransaction().begin();
+            em.remove(m);
+            em.getTransaction().commit();
+            return new MovieDTO(m);
+        }finally{
+            em.close();
+        }
+    }
 
 }

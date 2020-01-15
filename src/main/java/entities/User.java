@@ -3,7 +3,6 @@ package entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.management.relation.Role;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
