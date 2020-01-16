@@ -4,7 +4,7 @@ import facade from "./ApiFacade";
 import LogIn from "./Components/LogIn";
 import HomePage from "./Components/HomePage";
 import AdminUserface from "./Components/AdminUserface";
-import AdminMovies from "./Components/AdminMovies";
+import MovieAdministration from "./Components/MovieAdministration";
 
 import {
   BrowserRouter as Router,
@@ -45,7 +45,7 @@ function App() {
           <Route path="/admin">
             <AdminUserface />
             <Route path="/admin/movies">
-              <AdminMovies
+              <MovieAdministration
                 facade={facade}
                 allMovies={allMovies}
                 deletedMovie={deletedMovie}
