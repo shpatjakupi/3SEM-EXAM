@@ -29,7 +29,7 @@ import utils.EMF_Creator;
  *
  * @author shpattt
  */
-@Path("generic")
+@Path("movie")
 public class MovieResource {
     private static EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.DEV, EMF_Creator.Strategy.CREATE);
     private static final MovieFacade FACADE = MovieFacade.getMovieFacade(EMF);
